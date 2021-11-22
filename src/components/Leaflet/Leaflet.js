@@ -1,7 +1,7 @@
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Popup, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { getCenter } from 'geolib'
+import { Map as LeafletMap, TileLayer, Popup, Circle } from 'react-leaflet'
 
 const Leaflet = ({coordinateCenter, dataCountries, dataColor, isCases}) => {
    
@@ -17,11 +17,15 @@ const Leaflet = ({coordinateCenter, dataCountries, dataColor, isCases}) => {
                 {dataCountries?.map(ctry => (
                     <Circle key={ctry.country} 
                         center={[ctry.countryInfo?.lat, ctry.countryInfo?.long]} 
-                        radius={ctry[isCases] * 30} 
+                        radius={ctry[isCases] * 40} 
                         color={ctry[isCases] !== 0 && dataColor[isCases]}
                         fillColor={ctry[isCases] !== 0 && dataColor[isCases]}>
                         <Popup>
-                            {ctry.country}
+                            <img src={ctry.countryInfo.flag} alt={ctry.country} className="h-10"/>
+                            <p>Today Cases: {ctry.todayCases}</p>
+                            <p>Today Recovered: {ctry.todayRecovered}</p>
+                            <p>Today Deaths: {ctry.todayDeaths}</p>
+                            <p>{ctry.country}</p>
                         </Popup>
                     </Circle>
                 ))}  

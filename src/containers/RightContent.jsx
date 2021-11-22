@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { BsSortNumericDown, BsSortNumericUpAlt } from 'react-icons/bs'
+import { useFetch } from '../hooks/useFetch'
 
-const RightContent = ({dataCountries}) => {
+const RightContent = () => {
 
     const [isSort, setIsSort] = useState(false)
+    const { data } = useFetch('countries')
 
     const handleSort = () => setIsSort(!isSort)
 
-    let sortingData = dataCountries?.sort((a, b) => {
+    let sortingData = data?.sort((a, b) => {
         if(isSort) {
             return a.cases - b.cases
         } else {
@@ -18,7 +20,7 @@ const RightContent = ({dataCountries}) => {
 
 
     return (
-        <div className="w-full lg:w-1/4 bg-white shadow-md rounded-md h-700 overflow-y-scroll p-5">
+        <div className="w-full lg:w-1/4 bg-white shadow-md rounded-md h-750 overflow-y-scroll p-5">
             <div className="flex items-center justify-between mb-10 text-xl">
                 <h1 className="text-gray-500 font-medium">Live cases by country</h1>
                 {!isSort ? 

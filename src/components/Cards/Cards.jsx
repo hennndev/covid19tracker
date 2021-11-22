@@ -3,14 +3,13 @@ import Card from './Card'
 
 const Cards = ({data, isCases, setIsCases}) => {
 
-    console.log(data)
-
     return (
         <div className="grid grid-cols-cards gap-5">
             <Card
                 title="Coronavirus Cases"
                 totalToday={data?.todayCases} 
                 total={data?.cases} 
+                active={data?.active}
                 classes={`text-red-700 border-red-700 ${isCases === 'todayCases' && 'border-t-4 border-red-600'}`}
                 handleClick={() => setIsCases('todayCases')}/>
             <Card
